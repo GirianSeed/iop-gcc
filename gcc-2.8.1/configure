@@ -4483,6 +4483,14 @@ for machine in $build $host $target; do
 		;;
 	mips-*-gnu*)
 		;;
+	mips*-scei-ecoff*)
+		fixincludes=Makefile.in # There is nothing to fix
+		tm_file=mips/ecoffl-scei.h
+		if [ x$stabs = xyes ]; then
+			tm_file="${tm_file} dbx.h"
+		fi
+		tmake_file=mips/t-scei1
+		;;
 	mipsel-*-ecoff*)
 		tm_file=mips/ecoffl.h
 		if [ x$stabs = xyes ]; then
@@ -4497,6 +4505,11 @@ for machine in $build $host $target; do
 		fi
 		tmake_file=mips/t-ecoff
 		broken_install=yes
+		;;
+	mips*-scei-elf*)
+		fixincludes=Makefile.in # There is nothing to fix
+		tm_file="mips/elfl-scei.h libgloss.h"
+		tmake_file=mips/t-scei1
 		;;
 	mipsel-*-elf*)
 		tm_file="mips/elfl.h libgloss.h"
@@ -5137,6 +5150,9 @@ for machine in $build $host $target; do
 		esac
 		;;
 
+	mips*-scei-ecoff* | mips*-scei-elf*)
+		target_cpu_default2=16
+		;;
 	mips*-*-ecoff* | mips*-*-elf*)
 		if [ x$gas = xyes ]
 		then

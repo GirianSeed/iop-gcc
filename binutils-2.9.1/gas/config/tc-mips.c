@@ -1082,7 +1082,8 @@ md_begin ()
 	   running program can access it.  However, we don't load it
 	   if we are configured for an embedded target */
 	flags = SEC_READONLY | SEC_DATA;
-	if (strcmp (TARGET_OS, "elf") != 0)
+	if (strcmp (TARGET_OS, "elf") != 0
+	    && strcmp (TARGET_VENDOR, "scei") != 0 )
 	  flags |= SEC_ALLOC | SEC_LOAD;
 
 	if (! mips_64)
